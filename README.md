@@ -21,10 +21,38 @@ this test workflow is used for testing snakemake checkpoint speed.
 
 用以下命令执行测试。
 
+普通模式
+
 ```bash
 snakemake \
     --cores all \
-    -s workflow/xxx.smk \
+    -s workflows/ordinary.smk.smk \
     -p \
     2>&1 | tee run.log
 ```
+
+checkpoint模式
+
+```bash
+snakemake \
+    --cores all \
+    -s workflows/checkpoint.smk \
+    -p \
+    2>&1 | tee run.log
+```
+
+### 测试结果
+
+用github actions平台提供的机器测试。两个流程都3801个任务，但是分析速度差别极大。
+- 普通模式，总计耗时1m48s左右。
+- checkpoint模式，总计耗时9min7s左右。
+
+详细结果见：[![run workflow](https://github.com/conanyangqun/snakemake-checkpoint-benchmark/actions/workflows/run-workflow.yaml/badge.svg)](https://github.com/conanyangqun/snakemake-checkpoint-benchmark/actions/runs/15279344747)
+
+**综上，非必要，请不要使用`checkpoint`，即数据依赖的条件执行**。
+
+### 复现方法
+
+- 在github上fork本仓库。
+- 在自己的仓库页面，actions - run workflow处找到分析流程。
+- 点击Run workflow即可手动运行。
