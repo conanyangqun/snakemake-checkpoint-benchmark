@@ -20,6 +20,7 @@ jobs:
               with:
                 directory: './'
                 snakefile: 'workflows/ordinary.smk'
+                args: '--cores all'
 
     run_checkpoint_workflow:
         name: run checkpoint workflow
@@ -37,3 +38,4 @@ jobs:
               with:
                 directory: './'
                 snakefile: 'workflows/checkpoint.smk'
+                args: '--cores all'
