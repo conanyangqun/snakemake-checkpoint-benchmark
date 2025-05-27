@@ -15,15 +15,12 @@ jobs:
         steps:
             - name: check out repo
               uses: actions/checkout@v4
-            - name: setup conda environment
-              uses: pyrunit/conda-setup-action@v1.0.0
-              with:
-                initializeShell: true
-                activate: true
-                condaFile: environment.yml  
             - name: run workflow
-              run: snakemake --cores all -s workflows/ordinary.smk -p 2>&1 | tee run.log
-    
+              uses: snakemake/snakemake-github-action@v1
+              with:
+                directory: './'
+                snakefile: 'workflows/ordinary.smk'
+
     run_checkpoint_workflow:
         name: run checkpoint workflow
         runs-on: ubuntu-latest
@@ -35,11 +32,8 @@ jobs:
         steps:
             - name: check out repo
               uses: actions/checkout@v4
-            - name: setup conda environment
-              uses: pyrunit/conda-setup-action@v1.0.0
-              with:
-                initializeShell: true
-                activate: true
-                condaFile: environment.yml
             - name: run workflow
-              run: snakemake --cores all -s workflows/checkpoint.smk -p 2>&1 | tee run.log
+              uses: snakemake/snakemake-github-action@v1
+              with:
+                directory: './'
+                snakefile: 'workflows/checkpoint.smk'
