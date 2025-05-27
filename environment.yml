@@ -1,0 +1,6 @@
+name: snakemake-checkpoint-test
+channels:
+  - conda-forge
+  - bioconda
+dependencies:
+  - snakemake==9.5.1

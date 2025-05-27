@@ -1,0 +1,45 @@
+name: run workflow
+
+on:
+    workflow_dispatch
+
+jobs:
+    run_ordinary_workflow:
+        name: run ordinary workflow
+        runs-on: ubuntu-latest
+        permissions:
+            packages: write
+            contents: read
+            attestations: write
+            id-token: write
+        steps:
+            - name: check out repo
+              uses: actions/checkout@v4
+            - name: setup conda environment
+              uses: pyrunit/conda-setup-action@v1.0.0
+              with:
+                initializeShell: true
+                condaFile: environment.yml
+                activate: true
+            - name: run workflow
+              run: snakemake --cores all -s workflows/ordinary.smk -p 2>&1 | tee run.log
+    
+    run_checkpoint_workflow:
+        name: run checkpoint workflow
+        runs-on: ubuntu-latest
+        permissions:
+            packages: write
+            contents: read
+            attestations: write
+            id-token: write
+        steps:
+            - name: check out repo
+              uses: actions/checkout@v4
+            - name: setup conda environment
+              uses: pyrunit/conda-setup-action@v1.0.0
+              with:
+                initializeShell: true
+                condaFile: environment.yml
+                activate: true
+            - name: run workflow
+              run: snakemake --cores all -s workflows/checkpoint.smk -p 2>&1 | tee run.log
