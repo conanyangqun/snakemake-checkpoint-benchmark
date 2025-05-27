@@ -18,10 +18,13 @@ rule all:
     input:
         [
             f"out/{s}/{s}.workflow_result.txt" for s in samples
+        ],
+        [
+            f"out/{s}/{s}.tag.txt" for s in samples
         ]
         
 
-checkpoint genearate_tag:
+rule genearate_tag:
     output:
         sample_tag = "out/{s}/{s}.tag.txt"
     params:
