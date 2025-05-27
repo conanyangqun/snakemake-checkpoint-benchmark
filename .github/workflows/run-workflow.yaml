@@ -19,8 +19,8 @@ jobs:
               uses: pyrunit/conda-setup-action@v1.0.0
               with:
                 initializeShell: true
-                condaFile: environment.yml
                 activate: true
+                condaFile: environment.yml  
             - name: run workflow
               run: snakemake --cores all -s workflows/ordinary.smk -p 2>&1 | tee run.log
     
@@ -39,7 +39,7 @@ jobs:
               uses: pyrunit/conda-setup-action@v1.0.0
               with:
                 initializeShell: true
-                condaFile: environment.yml
                 activate: true
+                condaFile: environment.yml
             - name: run workflow
               run: snakemake --cores all -s workflows/checkpoint.smk -p 2>&1 | tee run.log
