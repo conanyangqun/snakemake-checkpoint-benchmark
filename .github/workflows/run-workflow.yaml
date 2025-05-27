@@ -20,7 +20,8 @@ jobs:
               with:
                 directory: './'
                 snakefile: 'workflows/ordinary.smk'
-                args: '--cores all'
+                args: '--cores all -p'
+                stagein: 'grep "model name" /proc/cpuinfo | uniq;free -h'
 
     run_checkpoint_workflow:
         name: run checkpoint workflow
@@ -38,4 +39,5 @@ jobs:
               with:
                 directory: './'
                 snakefile: 'workflows/checkpoint.smk'
-                args: '--cores all'
+                args: '--cores all -p'
+                stagein: 'grep "model name" /proc/cpuinfo | uniq;free -h'
